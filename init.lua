@@ -873,11 +873,34 @@ require("lazy").setup({
 	},
 	{
 		"stevearc/oil.nvim",
-		opts = {},
-		-- Optional dependencies
-		dependencies = { { "echasnovski/mini.icons", opts = {} } },
-		-- dependencies = { "nvim-tree/nvim-web-devicons" }, -- use if prefer nvim-web-devicons
+		cmd = { "Oil" },
+		config = function()
+			require("oil").setup({
+				delete_to_trash = true,
+				view_options = {
+					show_hidden = true,
+				},
+				-- Configuration for the floating window in oil.open_float
+				float = {
+					-- Padding around the floating window
+					padding = 10,
+					max_width = 0,
+					max_height = 0,
+					border = "rounded",
+					win_options = {
+						winblend = 0,
+					},
+					-- This is the config that will be passed to nvim_open_win.
+					-- Change values here to customize the layout
+					override = function(conf)
+						return conf
+					end,
+				},
+			})
+		end,
+		dependencies = { "nvim-tree/nvim-web-devicons" },
 	},
+
 	-- Adds git related signs to the gutter, as well as utilities for managing changes
 	-- NOTE: gitsigns is already included in init.lua but contains only the base
 	-- config. This will add also the recommended keymaps.
