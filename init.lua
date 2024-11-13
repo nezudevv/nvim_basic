@@ -624,22 +624,23 @@ require("lazy").setup({
 		},
 		opts = {
 			notify_on_error = false,
-			format_on_save = function(bufnr)
-				-- Disable "format_on_save lsp_fallback" for languages that don't
-				-- have a well standardized coding style. You can add additional
-				-- languages here or re-enable it for the disabled ones.
-				local disable_filetypes = { c = true, cpp = true, typescript = true, javascript = true }
-				local lsp_format_opt
-				if disable_filetypes[vim.bo[bufnr].filetype] then
-					lsp_format_opt = "never"
-				else
-					lsp_format_opt = "fallback"
-				end
-				return {
-					timeout_ms = 500,
-					lsp_format = lsp_format_opt,
-				}
-			end,
+			format_on_save = false,
+			-- function(bufnr)
+			-- 	-- Disable "format_on_save lsp_fallback" for languages that don't
+			-- 	-- have a well standardized coding style. You can add additional
+			-- 	-- languages here or re-enable it for the disabled ones.
+			-- 	local disable_filetypes = { c = true, cpp = true, typescript = true, javascript = true }
+			-- 	local lsp_format_opt
+			-- 	if disable_filetypes[vim.bo[bufnr].filetype] then
+			-- 		lsp_format_opt = "never"
+			-- 	else
+			-- 		lsp_format_opt = "fallback"
+			-- 	end
+			-- 	return {
+			-- 		timeout_ms = 500,
+			-- 		lsp_format = lsp_format_opt,
+			-- 	}
+			-- end,
 			formatters_by_ft = {
 				lua = { "stylua" },
 				-- Conform can also run multiple formatters sequentially
@@ -1229,6 +1230,29 @@ require("lazy").setup({
 	--  Uncomment the following line and add your plugins to `lua/custom/plugins/*.lua` to get going.
 	--    For additional information, see `:help lazy.nvim-lazy.nvim-structuring-your-plugins`
 	-- { import = 'custom.plugins' },
+	{
+		"dariuscorvus/tree-sitter-language-injection.nvim",
+		opts = {},
+	},
+	{
+		"supermaven-inc/supermaven-nvim",
+		lazy = false,
+		config = function()
+			require("supermaven-nvim").setup({
+				keymaps = {
+					accept_suggestion = "<A-Tab>",
+					clear_suggestion = "<C-]>",
+					accept_word = "<C-j>",
+				},
+				color = {
+					cterm = 244,
+				},
+				log_level = "info",
+				disable_inline_completion = false,
+				disable_keymaps = false,
+			})
+		end,
+	},
 }, {
 	ui = {
 		-- If you are using a Nerd Font: set icons to an empty table which will use the
