@@ -3,7 +3,11 @@
 --  NOTE: Must happen before plugins are loaded (otherwise wrong leader will be used)
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
+vim.o.tabstop = 2
 
+vim.o.softtabstop = 2
+
+vim.o.shiftwidth = 4
 -- Set to true if you have a Nerd Font installed and selected in the terminal
 vim.g.have_nerd_font = false
 
@@ -610,6 +614,27 @@ require("lazy").setup({
 
 	{ -- Autoformat
 		"stevearc/conform.nvim",
+		config = function()
+			local conform = require("conform")
+
+			conform.setup({
+				formatters_by_ft = {
+					javascript = { "prettier" },
+					typescript = { "prettier" },
+					javascriptreact = { "prettier" },
+					typescriptreact = { "prettier" },
+					svelte = { "prettier" },
+					css = { "prettier" },
+					html = { "prettier" },
+					json = { "prettier" },
+					yaml = { "prettier" },
+					markdown = { "prettier" },
+					graphql = { "prettier" },
+					lua = { "stylua" },
+					python = { "isort", "black" },
+				},
+			})
+		end,
 		event = { "BufWritePre" },
 		cmd = { "ConformInfo" },
 		keys = {
@@ -862,8 +887,6 @@ require("lazy").setup({
 				"html",
 				"lua",
 				"luadoc",
-				"markdown",
-				"markdown_inline",
 				"query",
 				"vim",
 				"vimdoc",
@@ -1096,9 +1119,9 @@ require("lazy").setup({
 		event = { "BufReadPre", "BufNewFile" },
 		config = function()
 			local lint = require("lint")
-			lint.linters_by_ft = {
-				markdown = { "markdownlint" },
-			}
+			-- lint.linters_by_ft = {
+			-- 	markdown = { "markdownlint" },
+			-- }
 
 			-- To allow other plugins to add linters to require('lint').linters_by_ft,
 			-- instead set linters_by_ft like this:
