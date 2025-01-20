@@ -28,6 +28,25 @@ vim.opt.mouse = "a"
 -- Don't show the mode, since it's already in the status line
 vim.opt.showmode = false
 
+vim.keymap.set("n", "<leader>gww", function()
+	require("telescope").extensions.git_worktree.git_worktrees()
+end, { desc = "Show Git Worktrees" })
+
+vim.keymap.set("n", "<leader>gwn", function()
+	-- Prompt for the worktree name (used for both path and branch)
+	vim.ui.input({ prompt = "Enter worktree name (used for path and branch): " }, function(name)
+		if not name or name == "" then
+			print("Worktree creation canceled")
+			return
+		end
+		-- Create the worktree using the same value for both path and branch
+		require("git-worktree").create_worktree(name, name)
+		print("Worktree created at: " .. name .. " with branch: " .. name)
+	end)
+end, { desc = "New Git Worktree" })
+
+vim.opt.termguicolors = true
+
 -- Sync clipboard between OS and Neovim.
 --  Schedule the setting after `UiEnter` because it can increase startup-time.
 --  Remove this option if you want your OS clipboard to remain independent.
@@ -36,6 +55,9 @@ vim.schedule(function()
 	vim.opt.clipboard = "unnamedplus"
 end)
 
+vim.opt.shiftwidth = 4
+vim.opt.tabstop = 4
+vim.opt.softtabstop = 4
 -- Enable break indent
 vim.opt.breakindent = true
 
@@ -1222,6 +1244,68 @@ require("lazy").setup({
 				return {}
 			end,
 		},
+	},
+	{
+		"ThePrimeagen/git-worktree.nvim",
+		config = function()
+			local Worktree = require("git-worktree")
+			-- Add hooks
+			Worktree.on_tree_change(function(op, metadata)
+				if op == Worktree.Operations.Create then
+					print("Switched to worktree: " .. metadata.path)
+
+					-- Add a delay of 2 seconds (2000 milliseconds)
+					vim.defer_fn(function()
+						print("Running setup after delay...")
+						-- Logic to create symlinks for .env files
+						local env_mappings = {
+							nucleus = "~/shared-envs/nucleus.env",
+							["rates-service"] = "~/shared-envs/rates-service.env",
+							web = "~/shared-envs/web.env",
+						}
+
+						for app, shared_env in pairs(env_mappings) do
+							shared_env = vim.fn.expand(shared_env) -- Expand tilde (~)
+							print(string.format("Using shared .env file: %s", shared_env))
+
+							-- Determine the target path for the symlink
+							local target_path
+							if app == "nucleus" then
+								target_path = string.format("%s/services/nucleus/nestjs/.env", metadata.path)
+							else
+								target_path = string.format("%s/services/%s/.env", metadata.path, app)
+							end
+
+							-- Ensure the target directory exists
+							local target_dir = vim.fn.fnamemodify(target_path, ":h") -- Extract target directory
+							local mkdir_command = string.format("mkdir -p %s", target_dir)
+							print(string.format("Creating target directory: %s", mkdir_command))
+							os.execute(mkdir_command) -- Create the target directory
+
+							-- Create the symlink
+							local symlink_command = string.format("ln -sf %s %s", shared_env, target_path)
+							print(string.format("Executing symlink command: %s", symlink_command))
+							local symlink_result = os.execute(symlink_command)
+							if symlink_result then
+								print(string.format("Symlinked %s to %s", shared_env, target_path))
+							else
+								print(string.format("Failed to create symlink for %s", app))
+							end
+						end
+					end, 2000) -- Delay of 2000 milliseconds (2 seconds)
+				end
+			end)
+		end,
+	},
+
+	{
+		"akinsho/bufferline.nvim",
+		config = function()
+			require("bufferline").setup({})
+		end,
+		lazy = false,
+		version = "*",
+		dependencies = "nvim-tree/nvim-web-devicons",
 	},
 
 	{
