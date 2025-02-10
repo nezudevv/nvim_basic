@@ -30,6 +30,13 @@ return {
 				lualine_y = { "location" },
 				lualine_z = {},
 			},
+			inactive_winbar = {
+				lualine_a = {},
+				lualine_b = { "branch", "diff", "diagnostics" },
+				lualine_x = {},
+				lualine_y = { "location" },
+				lualine_z = {},
+			},
 		})
 	end,
 }
