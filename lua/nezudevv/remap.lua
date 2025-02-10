@@ -2,8 +2,7 @@
 --  See `:help vim.keymap.set()`
 
 -- g
-vim.g.mapleader = " "
--- vim.g.maplocalleader = " "
+-- moved leader set to lazy_init file to ensure it is set before plugins are loaded
 
 -- keymap
 ---- normal
@@ -20,17 +19,10 @@ vim.keymap.set("n", "<left>", '<cmd>echo "Use h to move!!"<CR>') -- TIP: Disable
 vim.keymap.set("n", "<right>", '<cmd>echo "Use l to move!!"<CR>') -- TIP: Disable arrow keys in normal mode
 vim.keymap.set("n", "<up>", '<cmd>echo "Use k to move!!"<CR>') -- TIP: Disable arrow keys in normal mode
 vim.keymap.set("n", "<down>", '<cmd>echo "Use j to move!!"<CR>') -- TIP: Disable arrow keys in normal mode
-
-
----- visual
-vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv") -- move line down
-vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv") -- move line up
-
-vim.keymap.set("n", "<leader>gww", function() -- Worktree
+vim.keymap.set("n", "<leader>gww", function() -- Show Git Worktrees
 	require("telescope").extensions.git_worktree.git_worktrees()
 end, { desc = "Show Git Worktrees" })
-
-vim.keymap.set("n", "<leader>gwn", function()
+vim.keymap.set("n", "<leader>gwn", function() -- Create new worktree
 	-- Prompt for the worktree name (used for both path and branch)
 	vim.ui.input({ prompt = "Enter worktree name (used for path and branch): " }, function(name)
 		if not name or name == "" then
@@ -43,7 +35,9 @@ vim.keymap.set("n", "<leader>gwn", function()
 	end)
 end, { desc = "New Git Worktree" })
 
-
+---- visual
+vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv") -- move line down
+vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv") -- move line up
 
 
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier

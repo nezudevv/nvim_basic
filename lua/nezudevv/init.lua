@@ -1,6 +1,6 @@
+require("nezudevv.lazy_init")
 require("nezudevv.remap")
 require("nezudevv.set")
-require("nezudevv.lazy_init")
 
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
