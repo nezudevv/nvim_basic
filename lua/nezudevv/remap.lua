@@ -19,6 +19,7 @@ vim.keymap.set("n", "<left>", '<cmd>echo "Use h to move!!"<CR>') -- TIP: Disable
 vim.keymap.set("n", "<right>", '<cmd>echo "Use l to move!!"<CR>') -- TIP: Disable arrow keys in normal mode
 vim.keymap.set("n", "<up>", '<cmd>echo "Use k to move!!"<CR>') -- TIP: Disable arrow keys in normal mode
 vim.keymap.set("n", "<down>", '<cmd>echo "Use j to move!!"<CR>') -- TIP: Disable arrow keys in normal mode
+vim.keymap.set("n", "<C-c>", "ggVG\"+y", { noremap = true, silent = true }) -- Copy the entire buffer to the system clipboard
 vim.keymap.set("n", "<leader>gww", function() -- Show Git Worktrees
 	require("telescope").extensions.git_worktree.git_worktrees()
 end, { desc = "Show Git Worktrees" })
