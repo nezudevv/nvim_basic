@@ -5,10 +5,10 @@ return {
 		require("lualine").setup({
 			sections = {
 				lualine_a = {},
-				lualine_b = { "mode", "branch", "diff", "diagnostics" },
+				lualine_b = { "mode" },
 				lualine_c = {},
-				lualine_x = { "encoding", "fileformat" },
-				lualine_y = { "location" },
+				lualine_x = {},
+				lualine_y = {},
 				lualine_z = {},
 				-- lualine_c = { "filename" },
 				-- lualine_x = { "encoding", "fileformat", "filetype" },
@@ -21,6 +21,14 @@ return {
 				lualine_x = {},
 				lualine_y = {},
 				lualine_z = { "tabs" },
+			},
+			winbar = {
+				lualine_a = {},
+				lualine_b = { "branch", "diff", "diagnostics" },
+				lualine_c = {},
+				lualine_x = {},
+				lualine_y = { "location" },
+				lualine_z = {},
 			},
 		})
 	end,
