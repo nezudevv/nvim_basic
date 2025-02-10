@@ -23,6 +23,9 @@ return {
 					return conf
 				end,
 			},
+			keymaps = {
+				["<ESC>"] = "actions.close",
+			},
 		})
 	end,
 	dependencies = { "nvim-tree/nvim-web-devicons" },
