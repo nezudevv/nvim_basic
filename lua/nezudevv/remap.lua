@@ -35,6 +35,10 @@ vim.keymap.set("n", "<leader>gwn", function() -- Create new worktree
 		print("Worktree created at: " .. name .. " with branch: " .. name)
 	end)
 end, { desc = "New Git Worktree" })
+vim.keymap.set("n", "<leader>rl", function()
+    local is_relative = vim.wo.relativenumber
+    vim.wo.relativenumber = not is_relative
+end, { desc = "Toggle relative line numbers" })
 
 ---- visual
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv") -- move line down

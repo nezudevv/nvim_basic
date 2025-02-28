@@ -1,25 +1,34 @@
 return {
 	-- themes
-	{
-		"dgox16/oldworld.nvim",
-		config = function()
-			require("oldworld").setup({
-				styles = {
-					booleans = { italic = false },
-					comments = { italic = true }, -- style for comments
-					keywords = { italic = false }, -- style for keywords
-					identifiers = { italic = false }, -- style for identifiers
-					functions = { italic = false }, -- style for functions
-					variables = { italic = false }, -- style for variables
-				},
-			})
-		end,
-		lazy = false,
-		priority = 1000,
-		init = function()
-			vim.cmd.colorscheme("oldworld")
-		end,
-	},
+	"rebelot/kanagawa.nvim",
+	config = function()
+		require("kanagawa").setup({
+			background = { -- map the value of 'background' option to a theme
+				dark = "dragon", -- try "dragon" !
+			},
+		})
+		vim.cmd("colorscheme kanagawa")
+	end,
+	-- {
+	-- 	"dgox16/oldworld.nvim",
+	-- 	config = function()
+	-- 		require("oldworld").setup({
+	-- 			styles = {
+	-- 				booleans = { italic = false },
+	-- 				comments = { italic = true }, -- style for comments
+	-- 				keywords = { italic = false }, -- style for keywords
+	-- 				identifiers = { italic = false }, -- style for identifiers
+	-- 				functions = { italic = false }, -- style for functions
+	-- 				variables = { italic = false }, -- style for variables
+	-- 			},
+	-- 		})
+	-- 	end,
+	-- 	lazy = false,
+	-- 	priority = 1000,
+	-- 	init = function()
+	-- 		vim.cmd.colorscheme("oldworld")
+	-- 	end,
+	-- },
 }
 -- {
 -- 	"nyoom-engineering/oxocarbon.nvim",
