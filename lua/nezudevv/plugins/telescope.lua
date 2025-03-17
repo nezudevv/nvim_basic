@@ -58,12 +58,16 @@ return { -- Fuzzy Finder (files, lsp, etc)
 				["ui-select"] = {
 					require("telescope.themes").get_dropdown(),
 				},
+				['git-worktree'] = {
+					require("telescope").load_extension("git_worktree")
+				}
 			},
 		})
 
 		-- Enable Telescope extensions if they are installed
 		pcall(require("telescope").load_extension, "fzf")
 		pcall(require("telescope").load_extension, "ui-select")
+		pcall(require("telescope").load_extension("git_worktree"))
 
 		-- See `:help telescope.builtin`
 		local builtin = require("telescope.builtin")

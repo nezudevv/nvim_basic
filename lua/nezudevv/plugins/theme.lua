@@ -1,14 +1,19 @@
 return {
-	-- themes
-	"rebelot/kanagawa.nvim",
-	config = function()
-		require("kanagawa").setup({
-			background = { -- map the value of 'background' option to a theme
-				dark = "dragon", -- try "dragon" !
-			},
-		})
-		vim.cmd("colorscheme kanagawa")
+	"shaunsingh/nord.nvim",
+	config = function() --Lua:
+		vim.cmd([[colorscheme nord]])
 	end,
+
+	-- themes
+	-- "rebelot/kanagawa.nvim",
+	-- config = function()
+	-- 	require("kanagawa").setup({
+	-- 		background = { -- map the value of 'background' option to a theme
+	-- 			dark = "dragon", -- try "dragon" !
+	-- 		},
+	-- 	})
+	-- 	vim.cmd("colorscheme kanagawa")
+	-- end,
 	-- {
 	-- 	"dgox16/oldworld.nvim",
 	-- 	config = function()

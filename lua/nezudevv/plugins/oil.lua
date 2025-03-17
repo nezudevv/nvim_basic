@@ -24,7 +24,7 @@ return {
 				end,
 			},
 			keymaps = {
-				["<ESC>"] = "actions.close",
+				["<ESC><ESC>"] = "actions.close",
 			},
 		})
 	end,
