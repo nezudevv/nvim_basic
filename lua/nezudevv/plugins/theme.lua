@@ -1,8 +1,14 @@
 return {
-	"shaunsingh/nord.nvim",
-	config = function() --Lua:
-		vim.cmd([[colorscheme nord]])
+	"AlexvZyl/nordic.nvim",
+	lazy = false,
+	priority = 1000,
+	config = function()
+		require("nordic").load()
 	end,
+	-- "shaunsingh/nord.nvim",
+	-- config = function() --Lua:
+	-- 	vim.cmd([[colorscheme nord]])
+	-- end,
 
 	-- themes
 	-- "rebelot/kanagawa.nvim",
