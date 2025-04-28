@@ -1,6 +1,6 @@
 return {
-	-- "greggh/claude-code.nvim",
 	-- dependencies = {
+	-- "greggh/claude-code.nvim",
 	-- 	"nvim-lua/plenary.nvim", -- Required for git operations
 	-- },
 	-- config = function()
