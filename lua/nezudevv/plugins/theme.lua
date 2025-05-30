@@ -1,10 +1,31 @@
 return {
-	"AlexvZyl/nordic.nvim",
+	"folke/tokyonight.nvim",
 	lazy = false,
 	priority = 1000,
+	opts = {},
 	config = function()
-		require("nordic").load()
+		require("tokyonight").setup({
+			transparent = true,
+			styles = { sidebars = "transparent", floats = "transparent" },
+		})
+		vim.cmd([[colorscheme tokyonight-night]])
+
+		vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
+		vim.api.nvim_set_hl(0, "FloatBorder", { bg = "none" })
+
+		vim.api.nvim_set_hl(0, "WinSeparator", { bg = "none" })
+		vim.api.nvim_set_hl(0, "VertSplit", { bg = "none" })
+		vim.api.nvim_set_hl(0, "TabLine", { bg = "none" })
+		vim.api.nvim_set_hl(0, "TabLineFill", { bg = "none" })
+		vim.api.nvim_set_hl(0, "TabLineSel", { bg = "none" })
 	end,
+	-- "AlexvZyl/nordic.nvim",
+	-- lazy = false,
+	-- priority = 1000,
+	-- config = function()
+	-- 	require("nordic").load({ transparent = { bg = true } })
+	-- end,
+	---------
 	-- "shaunsingh/nord.nvim",
 	-- config = function() --Lua:
 	-- 	vim.cmd([[colorscheme nord]])

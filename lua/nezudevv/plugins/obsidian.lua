@@ -23,7 +23,7 @@ return {
 		workspaces = {
 			{
 				name = "default",
-				path = "~/dev-env/.local/vaults",
+				path = "~/env-provision/.local/vaults",
 			},
 			-- {
 
