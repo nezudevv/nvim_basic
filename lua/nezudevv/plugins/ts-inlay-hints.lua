@@ -25,7 +25,7 @@ return {
     -- litee.nvim (ensure this is loaded before litee-calltree.nvim)
     {
         "ldelossa/litee.nvim",
-        event = "VeryLazy", -- This is generally fine, but if you have issues, try 'LspAttach'
+        event = "LspAttach", -- This is generally fine, but if you have issues, try 'LspAttach'
         opts = {
             notify = { enabled = false },
             panel = {
@@ -42,7 +42,7 @@ return {
     {
         "ldelossa/litee-calltree.nvim",
         dependencies = { "ldelossa/litee.nvim" }, -- Correctly specified as a table
-        event = "VeryLazy", -- Use 'VeryLazy' or 'LspAttach' based on your preference
+        event = "LspAttach", -- This is generally fine, but if you have issues, try 'LspAttach'
         opts = {
             on_open = "panel",
             map_resize_keys = false,

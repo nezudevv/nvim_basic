@@ -2,19 +2,18 @@ return {
 	"nvim-lualine/lualine.nvim",
 	dependencies = { "nvim-tree/nvim-web-devicons" },
 	config = function()
-		local tokyonight = require("lualine.themes.tokyonight-night")
-
+		--
 		-- Set bg = "none" for everything in the theme
-		for _, section in pairs(tokyonight) do
-			for _, hl in pairs(section) do
-				hl.bg = "none"
-			end
-		end
+		-- for _, section in pairs(kanagawa) do
+		-- 	for _, hl in pairs(section) do
+		-- 		hl.bg = "none"
+		-- 	end
+		-- end
 
 		require("lualine").setup({
-			options = {
-				theme = tokyonight,
-			},
+			-- options = {
+			-- 	theme = nil -- should auto detect colorscheme,
+			-- },
 			sections = {
 				lualine_a = {},
 				lualine_b = { "mode" },

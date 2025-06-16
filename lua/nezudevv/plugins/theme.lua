@@ -1,24 +1,4 @@
 return {
-	"folke/tokyonight.nvim",
-	lazy = false,
-	priority = 1000,
-	opts = {},
-	config = function()
-		require("tokyonight").setup({
-			transparent = true,
-			styles = { sidebars = "transparent", floats = "transparent" },
-		})
-		vim.cmd([[colorscheme tokyonight-night]])
-
-		vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
-		vim.api.nvim_set_hl(0, "FloatBorder", { bg = "none" })
-
-		vim.api.nvim_set_hl(0, "WinSeparator", { bg = "none" })
-		vim.api.nvim_set_hl(0, "VertSplit", { bg = "none" })
-		vim.api.nvim_set_hl(0, "TabLine", { bg = "none" })
-		vim.api.nvim_set_hl(0, "TabLineFill", { bg = "none" })
-		vim.api.nvim_set_hl(0, "TabLineSel", { bg = "none" })
-	end,
 	-- "AlexvZyl/nordic.nvim",
 	-- lazy = false,
 	-- priority = 1000,
@@ -32,15 +12,30 @@ return {
 	-- end,
 
 	-- themes
-	-- "rebelot/kanagawa.nvim",
-	-- config = function()
-	-- 	require("kanagawa").setup({
-	-- 		background = { -- map the value of 'background' option to a theme
-	-- 			dark = "dragon", -- try "dragon" !
-	-- 		},
-	-- 	})
-	-- 	vim.cmd("colorscheme kanagawa")
-	-- end,
+	{
+		"sainnhe/gruvbox-material",
+		priority = 1000, -- load before other plugins
+		config = function()
+			vim.g.gruvbox_material_background = "hard"
+			vim.g.gruvbox_material_foreground = "material"
+			vim.g.gruvbox_material_enable_italic = 1
+			vim.g.gruvbox_material_disable_italic_comment = 0
+			vim.g.gruvbox_material_better_performance = 1
+
+			vim.o.background = "dark"
+			vim.cmd("colorscheme gruvbox-material")
+		end,
+	},
+	-- {
+	-- 	"rebelot/kanagawa.nvim",
+	-- 	lazy = false,
+	-- 	priority = 1000,
+	-- 	opts = {},
+	-- 	config = function()
+	-- 		vim.cmd("colorscheme kanagawa-dragon")
+	-- 	end,
+	-- 	cache = true
+	-- },
 	-- {
 	-- 	"dgox16/oldworld.nvim",
 	-- 	config = function()
